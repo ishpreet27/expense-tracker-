@@ -6,64 +6,103 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Expense Tracker App</title>
   <link rel="stylesheet" href="style.css" />
+
+  <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- jsPDF for PDF export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
-  <h1>Expense Tracker App</h1>
+  <div class="app-container">
+    <header>
+      <div class="header-left">
+        <h1>Expense Tracker</h1>
+        <p>Track your spending and stay within budget</p>
+      </div>
+      <div class="header-right">
+        <button id="theme-toggle">🌙 Dark Mode</button>
+      </div>
+    </header>
 
-  <div class="budget-section">
-    <label for="monthly-budget">Monthly Budget:</label>
-    <input type="number" id="monthly-budget" placeholder="Enter monthly budget" />
-    <button id="set-budget-btn">Set Budget</button>
-    <p id="remaining-budget-display">Remaining Budget: ₹0</p>
-  </div>
+    <!-- Budget section -->
+    <div class="budget-section">
+      <label for="monthly-budget">Monthly Budget:</label>
+      <input type="number" id="monthly-budget" placeholder="Enter monthly budget" />
+      <button id="set-budget-btn">Set Budget</button>
+      <p id="remaining-budget-display">Remaining Budget: ₹0</p>
 
-  <div class="input-section">
-    <label for="category-select">Category:</label>
-    <select id="category-select">
-      <option value="Food & Beverage">Food & Beverage</option>
-      <option value="Stationary">Stationary</option>
-      <option value="Transport">Transport</option>
-      <option value="Other">Other</option>
-    </select>
+      <div class="budget-progress">
+        <div class="progress-bar">
+          <div class="progress-fill" id="budget-progress-fill"></div>
+        </div>
+        <p id="budget-status-text">No budget set</p>
+      </div>
+    </div>
 
-    <label for="amount-input">Amount:</label>
-    <input type="number" id="amount-input" />
+    <!-- Add expense -->
+    <div class="input-section">
+      <label for="category-select">Category:</label>
+      <select id="category-select">
+        <option value="Food & Beverage">Food & Beverage</option>
+        <option value="Stationary">Stationary</option>
+        <option value="Transport">Transport</option>
+        <option value="Other">Other</option>
+      </select>
 
-    <label for="date-input">Date:</label>
-    <input type="date" id="date-input" />
+      <label for="amount-input">Amount:</label>
+      <input type="number" id="amount-input" />
 
-    <button id="add-btn">Add</button>
-  </div>
+      <label for="date-input">Date:</label>
+      <input type="date" id="date-input" />
 
-  <div class="expenses-list">
-    <h2>Expenses List</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Category</th>
-          <th>Amount</th>
-          <th>Date</th>
-          <th>Delete</th>
-        </tr>
-      </thead>
-      <tbody id="expnese-table-body"></tbody>
-      <tfoot>
-        <tr>
-          <td>Total:</td>
-          <td id="total-amount">0</td>
-          <td></td>
-          <td></td>
-        </tr>
-      </tfoot>
-    </table>
-  </div>
+      <button id="add-btn">Add</button>
+    </div>
 
-  <div class="charts-section">
-    <h2>Expense Distribution</h2>
-    <canvas id="pieChart" width="200" height="100"></canvas>
-    <h2>Monthly Comparison</h2>
-    <canvas id="barChart" width="200" height="100"></canvas>
+    <!-- Export -->
+    <div class="export-section">
+      <button id="download-pdf-btn">Export as PDF</button>
+    </div>
+
+    <!-- Table -->
+    <div class="expenses-list">
+      <h2>Expenses List</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody id="expense-table-body"></tbody>
+        <tfoot>
+          <tr>
+            <td>Total:</td>
+            <td id="total-amount">0</td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <!-- Charts -->
+    <div class="charts-section">
+      <div class="chart-card">
+        <h2>Expense Distribution</h2>
+        <canvas id="pieChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Category cards with circular ring -->
+    <div class="category-section">
+      <h2>Categories</h2>
+      <div id="category-list" class="category-list">
+        <!-- Filled by JS -->
+      </div>
+    </div>
   </div>
 
   <script src="script.js"></script>
