@@ -1,4 +1,4 @@
-Expense Tracker App
+Expense Tracker 
 A simple and responsive web-based Expense Tracker that helps you manage your monthly budget by tracking expenses by category, visualizing your spending through charts, and calculating the remaining budget.
 
 📌 Features
